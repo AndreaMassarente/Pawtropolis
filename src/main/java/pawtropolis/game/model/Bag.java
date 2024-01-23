@@ -28,5 +28,15 @@ public class Bag {
         items.remove(item);
     }
 
+    public boolean isPresent(String itemName) {
+        return items.stream()
+                .anyMatch(item -> item.getName().equalsIgnoreCase(itemName));
+    }
 
+    public Item getItemByName(String itemName) {
+        return items.stream()
+                .filter(item -> item.getName().equalsIgnoreCase(itemName))
+                .findFirst()
+                .orElse(null);
+    }
 }

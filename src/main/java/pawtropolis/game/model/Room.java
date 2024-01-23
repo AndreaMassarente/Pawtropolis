@@ -13,6 +13,7 @@ public class Room {
     private final List<Item> items;
     private List<Animal> animals;
     private EnumMap<DirectionEnum, Room> adjacentsRoom;
+    private EnumMap<DirectionEnum, Door> doors;
 
 
     public Room(String roomName) {
@@ -20,7 +21,7 @@ public class Room {
         this.adjacentsRoom = new EnumMap<>(DirectionEnum.class);
         this.items = new ArrayList<>();
         this.animals = new ArrayList<>();
-
+        this.doors = new EnumMap<>(DirectionEnum.class);
     }
 
     public void addItem(Item item) {
@@ -38,6 +39,10 @@ public class Room {
     public void addAdjacents(DirectionEnum direction, Room nextRoom) {
         adjacentsRoom.put(direction, nextRoom);
         nextRoom.adjacentsRoom.put(DirectionEnum.getOppositeDirection(direction), this);
+    }
+
+    public void addDoor(DirectionEnum direction, Door door) {
+        doors.put(direction, door);
     }
 
     public Map<DirectionEnum, Room> getAdjacentsRoom() {

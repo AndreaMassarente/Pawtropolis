@@ -4,7 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pawtropolis.game.gamecontroller.DirectionEnum;
 import pawtropolis.game.gamecontroller.GameController;
+import pawtropolis.game.model.Door;
+import pawtropolis.game.model.Item;
 import pawtropolis.game.model.Room;
+
+import java.util.Scanner;
 
 @RequiredArgsConstructor
 @Component
@@ -13,13 +17,52 @@ public class GoCommand implements Command {
 
     private void goRoom(DirectionEnum direction) {
         if (gamePopulation.getCurrentRoom().getAdjacentsRoom().containsKey(direction)) {
-            Room nextRoom = gamePopulation.getCurrentRoom().getAdjacentsRoom().get(direction);
-            gamePopulation.setCurrentRoom(nextRoom);
-            System.out.println("You have entered " + nextRoom.getName());
+            openDoor(direction);
         } else {
             System.out.println("Invalid direction. Try again.");
         }
     }
+
+    public void openDoor(DirectionEnum direction) {
+        Door door = gamePopulation.getCurrentRoom().getDoors().get(direction);
+        Scanner scanner = new Scanner(System.in);
+        if (!door.isOpen()) {
+            System.out.println("The door is locked. Would you like to use an item to unlock it?");
+            String answer = scanner.nextLine();
+            if (answer.equalsIgnoreCase("Y")) {
+                unlockDoor(direction);
+            } else if (answer.equalsIgnoreCase("N")) {
+                System.out.println("Hai scelto di non aprire la porta");
+            } else {
+                System.out.println("You must answer Y or N");
+            }
+        } else {
+            changeRoom(direction);
+        }
+    }
+
+    public void unlockDoor(DirectionEnum direction) {
+        Door door = gamePopulation.getCurrentRoom().getDoors().get(direction);
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Type the name of the chosen item");
+        String itemName = scanner.nextLine();
+        if (!gamePopulation.getPlayer().isPresentInBag(itemName)) {
+            System.out.println("This is not the right item");
+        } else {
+            door.unlock(itemName);
+            System.out.println("You unlocked the door!");
+            Item removedItem = gamePopulation.getPlayer().getItemByName(itemName);
+            gamePopulation.getPlayer().dropItem(removedItem);
+            changeRoom(direction);
+        }
+    }
+
+    public void changeRoom(DirectionEnum direction) {
+        Room nextRoom = gamePopulation.getCurrentRoom().getAdjacentsRoom().get(direction);
+        gamePopulation.setCurrentRoom(nextRoom);
+        System.out.println("You have entered " + nextRoom.getName());
+    }
+
 
     @Override
     public void execute(String[] inputParts) {

@@ -36,6 +36,14 @@ public class Player {
         bag.dropItem(item);
     }
 
+    public boolean isPresentInBag(String itemName){
+        return bag.isPresent(itemName);
+    }
+
+    public Item getItemByName(String itemName) {
+        return bag.getItemByName(itemName);
+    }
+
 }
 
 
