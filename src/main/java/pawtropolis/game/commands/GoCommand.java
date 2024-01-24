@@ -51,7 +51,7 @@ public class GoCommand implements Command {
             gamePopulation.getPlayer().dropItem(removedItem);
             changeRoom(direction);
         } else {
-            System.out.println("This is not the right item or not present in your bag");
+            System.out.println("You need " + door.getRequiredKey() + " to open the door");
         }
     }
 

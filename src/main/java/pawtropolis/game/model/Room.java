@@ -15,7 +15,6 @@ public class Room {
     private final List<Item> items;
     private List<Animal> animals;
     private EnumMap<DirectionEnum, Room> adjacentsRoom;
-    @Getter(AccessLevel.NONE)
     private EnumMap<DirectionEnum, Door> doors;
 
 

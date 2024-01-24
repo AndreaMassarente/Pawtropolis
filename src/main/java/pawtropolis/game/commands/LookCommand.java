@@ -2,7 +2,9 @@ package pawtropolis.game.commands;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import pawtropolis.game.gamecontroller.DirectionEnum;
 import pawtropolis.game.gamecontroller.GameController;
+import pawtropolis.game.model.Door;
 import pawtropolis.game.model.Room;
 
 @RequiredArgsConstructor
@@ -14,9 +16,17 @@ public class LookCommand implements Command {
         return room.getAdjacentsRoom().keySet().toString();
     }
 
+    private void getAvailableDoors() {
+        gamePopulation.getCurrentRoom().getDoors().forEach((direction, door) -> {
+            String doorStatus = door.isOpen() ? "open" : "closed";
+            System.out.println(direction + " door: " + doorStatus);
+        });
+    }
+
     private void lookRoom() {
         System.out.println("You're in the room: " + gamePopulation.getCurrentRoom().getName());
         System.out.println("Available directions: " + getAvailableDirections(gamePopulation.getCurrentRoom()));
+        getAvailableDoors();
 
         if (!gamePopulation.getCurrentRoom().getItems().isEmpty()) {
             System.out.println("Available items:");

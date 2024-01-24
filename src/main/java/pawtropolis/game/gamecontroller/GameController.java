@@ -34,17 +34,19 @@ public class GameController {
         Room roomSumeru = new Room("Sumeru");
         Room roomFontaine = new Room("Fontaine");
 
-        Door MonstadtLiyue = new Door(false);
-        Door LiyueSumeru = new Door(true);
-        Door LiyueInazuma = new Door(false);
-        Door SumeruFontaine = new Door(false);
+        Door MonstadtLiyue = new Door(false,"liyue key");
+        Door LiyueSumeru = new Door(true,"key");
+        Door LiyueInazuma = new Door(false,"sumeru key");
+        Door SumeruFontaine = new Door(false,"fontaine key");
 
         Item item1 = new Item("long sword", "A Sword user’s Normal Attack is typically a chain of “rapid strikes”", 5);
         Item item2 = new Item("bow", "A Bow user’s Normal Attack launches a chain of fast, mid-ranged shots", 10);
         Item item3 = new Item("polearm", "A Polearm user’s Normal Attack performs a few rapid, consecutive spear strikes", 10);
         Item item4 = new Item("catalyst", "A Catalyst user applies element to enemies when they are hit with Normal Attack", 11);
 
-        Item key = new Item("key", "This key could open any door, you can use it once", 1);
+        Item liyueKey = new Item("liyue key", "This key could open one door, you can use it once", 1);
+        Item sumeruKey = new Item("sumeru key", "This key could open one door, you can use it once", 1);
+        Item fontaineKey = new Item("fontaine key", "This key could open one door, you can use it once", 1);
 
         Lion lion1 = new Lion("Venti", "Ribs", 4, LocalDate.of(2019, 1, 23), 2.0, 1.28, 40);
         Lion lion2 = new Lion("Zhongli", "Chicken", 8, LocalDate.of(2015, 4, 10), 1.09, 1.17, 36);
@@ -64,11 +66,11 @@ public class GameController {
         roomSumeru.addAdjacents(DirectionEnum.NORTH, roomFontaine, SumeruFontaine);
 
         roomMonstadt.addItem(item1);
-        roomMonstadt.addItem(key);
+        roomMonstadt.addItem(liyueKey);
         roomLiyue.addItem(item2);
-        roomSumeru.addItem(key);
+        roomSumeru.addItem(fontaineKey);
         roomInazuma.addItem(item3);
-        roomInazuma.addItem(key);
+        roomInazuma.addItem(sumeruKey);
         roomFontaine.addItem(item3);
         player.addItem(item4);
 
