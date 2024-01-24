@@ -45,7 +45,7 @@ public class Room {
         nextRoom.doors.put(DirectionEnum.getOppositeDirection(direction), door);
     }
 
-    public Door getDoor(DirectionEnum direction){
+    public Door getDoor(DirectionEnum direction) {
         return doors.get(direction);
     }
 
@@ -53,8 +53,10 @@ public class Room {
         return adjacentsRoom;
     }
 
-
-
-
-
+    public void getAvailableDoors() {
+        doors.forEach((direction, door) -> {
+            String doorStatus = door.isOpen() ? "open" : "closed";
+            System.out.println(direction + " door: " + doorStatus);
+        });
+    }
 }

@@ -35,7 +35,7 @@ public class GameController {
         Room roomFontaine = new Room("Fontaine");
 
         Door monstadtLiyue = new Door(false,"liyue key");
-        Door liyueSumeru = new Door(true,"key");
+        Door liyueSumeru = new Door(true);
         Door liyueInazuma = new Door(false,"sumeru key");
         Door sumeruFontaine = new Door(false,"fontaine key");
 

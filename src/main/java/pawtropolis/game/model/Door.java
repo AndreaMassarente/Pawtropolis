@@ -6,11 +6,15 @@ import lombok.Getter;
 public class Door {
     private boolean isOpen;
 
-    private final String requiredKey;
+    private String requiredKey;
 
     public Door(boolean isOpen, String requiredKey) {
         this.isOpen = isOpen;
         this.requiredKey = requiredKey;
+    }
+
+    public Door(boolean isOpen) {
+        this.isOpen = isOpen;
     }
 
     public boolean unlock(String itemName) {
