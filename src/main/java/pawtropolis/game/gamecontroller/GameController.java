@@ -34,10 +34,10 @@ public class GameController {
         Room roomSumeru = new Room("Sumeru");
         Room roomFontaine = new Room("Fontaine");
 
-        Door MonstadtLiyue = new Door(false,"liyue key");
-        Door LiyueSumeru = new Door(true,"key");
-        Door LiyueInazuma = new Door(false,"sumeru key");
-        Door SumeruFontaine = new Door(false,"fontaine key");
+        Door monstadtLiyue = new Door(false,"liyue key");
+        Door liyueSumeru = new Door(true,"key");
+        Door liyueInazuma = new Door(false,"sumeru key");
+        Door sumeruFontaine = new Door(false,"fontaine key");
 
         Item item1 = new Item("long sword", "A Sword user’s Normal Attack is typically a chain of “rapid strikes”", 5);
         Item item2 = new Item("bow", "A Bow user’s Normal Attack launches a chain of fast, mid-ranged shots", 10);
@@ -60,10 +60,10 @@ public class GameController {
         Eagle eagle2 = new Eagle("Dvalin", "Chicken", 30, LocalDate.of(1993, 5, 1), 2.48, 0.90, 33);
         Eagle eagle3 = new Eagle("Ayaka", "Mouse", 1, LocalDate.of(2023, 6, 28), 1.98, 0.45, 13);
 
-        roomMonstadt.addAdjacents(DirectionEnum.WEST, roomLiyue, MonstadtLiyue);
-        roomLiyue.addAdjacents(DirectionEnum.SOUTH, roomInazuma,LiyueSumeru);
-        roomLiyue.addAdjacents(DirectionEnum.WEST, roomSumeru, LiyueInazuma);
-        roomSumeru.addAdjacents(DirectionEnum.NORTH, roomFontaine, SumeruFontaine);
+        roomMonstadt.addAdjacents(DirectionEnum.WEST, roomLiyue, monstadtLiyue);
+        roomLiyue.addAdjacents(DirectionEnum.SOUTH, roomInazuma,liyueSumeru);
+        roomLiyue.addAdjacents(DirectionEnum.WEST, roomSumeru, liyueInazuma);
+        roomSumeru.addAdjacents(DirectionEnum.NORTH, roomFontaine, sumeruFontaine);
 
         roomMonstadt.addItem(item1);
         roomMonstadt.addItem(liyueKey);
