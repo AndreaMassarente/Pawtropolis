@@ -24,15 +24,14 @@ public class GoCommand implements Command {
     }
 
     public void openDoor(DirectionEnum direction) {
-        Door door = gamePopulation.getCurrentRoom().getDoors().get(direction);
+        Door door = gamePopulation.getCurrentRoom().getDoor(direction);
         Scanner scanner = new Scanner(System.in);
         if (!door.isOpen()) {
-            System.out.println("The door is locked. Would you like to use an item to unlock it?");
+            System.out.println("The door is locked. Would you like to use an item to unlock it? Y/N");
             String answer = scanner.nextLine();
             if (answer.equalsIgnoreCase("Y")) {
                 unlockDoor(direction);
             } else if (answer.equalsIgnoreCase("N")) {
-                System.out.println("Hai scelto di non aprire la porta");
             } else {
                 System.out.println("You must answer Y or N");
             }
@@ -42,18 +41,17 @@ public class GoCommand implements Command {
     }
 
     public void unlockDoor(DirectionEnum direction) {
-        Door door = gamePopulation.getCurrentRoom().getDoors().get(direction);
+        Door door = gamePopulation.getCurrentRoom().getDoor(direction);
         Scanner scanner = new Scanner(System.in);
         System.out.println("Type the name of the chosen item");
         String itemName = scanner.nextLine();
-        if (!gamePopulation.getPlayer().isPresentInBag(itemName)) {
-            System.out.println("This is not the right item");
-        } else {
-            door.unlock(itemName);
+        if (gamePopulation.getPlayer().isPresentInBag(itemName) && door.unlock(itemName)) {
             System.out.println("You unlocked the door!");
             Item removedItem = gamePopulation.getPlayer().getItemByName(itemName);
             gamePopulation.getPlayer().dropItem(removedItem);
             changeRoom(direction);
+        } else {
+            System.out.println("This is not the right item or not present in your bag");
         }
     }
 

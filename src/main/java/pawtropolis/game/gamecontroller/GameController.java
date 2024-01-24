@@ -36,15 +36,15 @@ public class GameController {
 
         Door MonstadtLiyue = new Door(false);
         Door LiyueSumeru = new Door(true);
-        Door LiyueInazuma = new Door(true);
-        Door SumeruFontaine = new Door(true);
+        Door LiyueInazuma = new Door(false);
+        Door SumeruFontaine = new Door(false);
 
         Item item1 = new Item("long sword", "A Sword user’s Normal Attack is typically a chain of “rapid strikes”", 5);
         Item item2 = new Item("bow", "A Bow user’s Normal Attack launches a chain of fast, mid-ranged shots", 10);
         Item item3 = new Item("polearm", "A Polearm user’s Normal Attack performs a few rapid, consecutive spear strikes", 10);
         Item item4 = new Item("catalyst", "A Catalyst user applies element to enemies when they are hit with Normal Attack", 11);
 
-        Item key = new Item("key", "A key", 1);
+        Item key = new Item("key", "This key could open any door, you can use it once", 1);
 
         Lion lion1 = new Lion("Venti", "Ribs", 4, LocalDate.of(2019, 1, 23), 2.0, 1.28, 40);
         Lion lion2 = new Lion("Zhongli", "Chicken", 8, LocalDate.of(2015, 4, 10), 1.09, 1.17, 36);
@@ -58,27 +58,19 @@ public class GameController {
         Eagle eagle2 = new Eagle("Dvalin", "Chicken", 30, LocalDate.of(1993, 5, 1), 2.48, 0.90, 33);
         Eagle eagle3 = new Eagle("Ayaka", "Mouse", 1, LocalDate.of(2023, 6, 28), 1.98, 0.45, 13);
 
-        roomMonstadt.addAdjacents(DirectionEnum.WEST, roomLiyue);
-        roomLiyue.addAdjacents(DirectionEnum.SOUTH, roomInazuma);
-        roomLiyue.addAdjacents(DirectionEnum.WEST, roomSumeru);
-        roomSumeru.addAdjacents(DirectionEnum.NORTH, roomFontaine);
-
-        roomMonstadt.addDoor(DirectionEnum.WEST, MonstadtLiyue);
-        roomLiyue.addDoor(DirectionEnum.EAST,MonstadtLiyue);
-        roomLiyue.addDoor(DirectionEnum.WEST,LiyueSumeru);
-        roomSumeru.addDoor(DirectionEnum.EAST,LiyueSumeru);
-        roomLiyue.addDoor(DirectionEnum.SOUTH,LiyueInazuma);
-        roomInazuma.addDoor(DirectionEnum.NORTH,LiyueInazuma);
-        roomSumeru.addDoor(DirectionEnum.NORTH, SumeruFontaine);
-        roomFontaine.addDoor(DirectionEnum.SOUTH, SumeruFontaine);
+        roomMonstadt.addAdjacents(DirectionEnum.WEST, roomLiyue, MonstadtLiyue);
+        roomLiyue.addAdjacents(DirectionEnum.SOUTH, roomInazuma,LiyueSumeru);
+        roomLiyue.addAdjacents(DirectionEnum.WEST, roomSumeru, LiyueInazuma);
+        roomSumeru.addAdjacents(DirectionEnum.NORTH, roomFontaine, SumeruFontaine);
 
         roomMonstadt.addItem(item1);
+        roomMonstadt.addItem(key);
         roomLiyue.addItem(item2);
+        roomSumeru.addItem(key);
         roomInazuma.addItem(item3);
+        roomInazuma.addItem(key);
         roomFontaine.addItem(item3);
         player.addItem(item4);
-
-        player.addItem(key);
 
         roomMonstadt.addAnimal(lion1);
         roomMonstadt.addAnimal(eagle2);

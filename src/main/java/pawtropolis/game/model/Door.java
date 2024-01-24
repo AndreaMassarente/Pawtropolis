@@ -12,7 +12,8 @@ public class Door {
         return isOpen;
     }
 
-    public void unlock(String itemName) {
+    public boolean unlock(String itemName) {
         isOpen = !isOpen && itemName.equalsIgnoreCase("key");
+        return isOpen;
     }
 }
